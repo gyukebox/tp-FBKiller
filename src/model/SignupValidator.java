@@ -4,6 +4,7 @@ public class SignupValidator implements Runnable {
     private String idInput;
     private String pwInput;
     private Database db;
+    private Thread thr;
 
     @Override
     public void run() {
@@ -19,5 +20,6 @@ public class SignupValidator implements Runnable {
     }
 
     public void confirm(String id, String pw) {
+
     }
 }

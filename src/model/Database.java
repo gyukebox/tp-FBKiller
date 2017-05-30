@@ -13,7 +13,7 @@ public class Database {
     private Connection conn;
     private PreparedStatement statement;
 
-    public Database() throws ClassNotFoundException, SQLException {
+    private Database() {
         this.sql = null;
         this.dburl = "jdbc:mysql://localhost:3306/timeline";
         this.dbid = "root";
@@ -56,6 +56,7 @@ public class Database {
         }
     }
 
+
     public void viewAllData() {
         this.connect();
 
@@ -67,5 +68,6 @@ public class Database {
             e.printStackTrace();
         }
     }
+
 }
 
