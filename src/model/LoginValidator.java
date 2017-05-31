@@ -1,7 +1,6 @@
 package model;
 
 public class LoginValidator {
-    private Database db;
     private String idInput;
     private String pwInput;
 
@@ -11,6 +10,8 @@ public class LoginValidator {
     }
 
     public boolean isValid(String idInput, String pwInput) {
+        Database db = new Database();
+
         return false;
     }
 }

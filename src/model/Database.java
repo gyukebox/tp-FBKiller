@@ -13,7 +13,7 @@ public class Database {
     private Connection conn;
     private PreparedStatement statement;
 
-    private Database() {
+    public Database() {
         this.sql = null;
         this.dburl = "jdbc:mysql://localhost:3306/timeline";
         this.dbid = "root";
