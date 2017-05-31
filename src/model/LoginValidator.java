@@ -10,7 +10,7 @@ public class LoginValidator {
     }
 
     public boolean isValid(String idInput, String pwInput) {
-        Database db = new Database();
+        //Database db = Database.getInstance();
 
         return false;
     }
