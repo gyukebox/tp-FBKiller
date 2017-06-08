@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Writing</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <caption> 글쓰기 </caption>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>제목: </th>
+                    <td>
+                        <input type="text" placeholder="제목을 입력하세요. " name="subject" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용: </th>
+                    <td>
+                        <textarea class="ckeditor" name="editor1" id="editor1"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이미지: </th>
+                    <td>
+                        <input type="text" placeholder="소스를 입력하세요. " name="filename" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" onclick="sendData()" class="btn btn-primary pull-right">등록</button>
+                        <button type="button" class="btn btn-primary pull-left" onclick="location.href='writeList.html'">글 목록으로..</button>
+                        <!-- onclick="javascript:location.href='list.jsp'"" -->
+                    </td>
+                </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
