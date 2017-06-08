@@ -52,22 +52,14 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "DELETE FROM ban WHERE number =" + num;
-
-            // �� ���� [Connection]
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-
-            // �� ���� [Statement]
             stmt = conn.createStatement();
-
-            // �� ���� [CRUD]
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             System.out.println("[���� ����]\n" + e.getStackTrace());
         } finally {
-            // �� �ݱ�
             closeDB();
         }
-
         return resultValue;
     }
 
