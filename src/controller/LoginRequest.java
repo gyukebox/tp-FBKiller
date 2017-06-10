@@ -20,7 +20,7 @@ public class LoginRequest extends HttpServlet {
         String pw = request.getParameter("pw");
 
         this.validator = new LoginValidator(id, pw);
-        if(validator.isValid(id, pw)) {
+        if (validator.isValid()) {
             response.sendRedirect("/timeline.html");
         } else {
             System.out.println("id or password is incorrect");

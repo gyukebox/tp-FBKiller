@@ -5,10 +5,10 @@ import java.sql.*;
 public abstract class Database {
 
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    final String DB_URL = "jdbc:mysql://127.0.0.1:3306/Facebook";
+    final String DB_URL = "jdbc:mysql://localhost:3306/facebook";
 
     final String USERNAME = "root";
-    final String PASSWORD = "1234";
+    final String PASSWORD = "biss9541";
 
     Connection conn;
     Statement stmt;
@@ -23,6 +23,7 @@ public abstract class Database {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("connection error!");
             e.printStackTrace();
         }
     }
@@ -43,6 +44,10 @@ public abstract class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int insert(String ID, String PW, int status, String HP, char gender) {
+        return 0;
     }
 
     public abstract void selectAll();
