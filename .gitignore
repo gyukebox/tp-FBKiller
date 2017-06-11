@@ -1,4 +1,5 @@
-*.xml
 *.iml
 out/*
+.idea/*
+*.class
 web/ckeditor/*

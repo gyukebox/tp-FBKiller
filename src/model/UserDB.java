@@ -52,6 +52,7 @@ public class UserDB extends Database {
                 System.out.print(rs.getInt("status"));
                 System.out.println();
             }
+            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,7 +82,6 @@ public class UserDB extends Database {
         try {
             super.connect();
             String query = "DELETE FROM user WHERE id =" + str;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             result = stmt.executeUpdate(query);
         } catch (SQLException e) {
@@ -95,7 +95,6 @@ public class UserDB extends Database {
 
         try {
             String queryString = "UPDATE user SET head=" + Head + ", body='" + Body + "' WHERE number =" + user_num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -105,18 +104,31 @@ public class UserDB extends Database {
         return resultValue;
     }
 
+    public int update(String id) {
+        int resultValue = 0;
+
+        try {
+            String query = "UPDATE user SET status = 1 WHERE id = " + id;
+            stmt = conn.createStatement();
+            resultValue = stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultValue;
+    }
+
     @Override
     public void selectOne(int num) {
         try {
             super.connect();
             String queryString = "SELECT * FROM user WHERE number =\'" + num + "\'";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
             System.out.println("user_num" + "\t" + "ID" + "\t" + "PW" + "\t" + "Status");
             while (rs.next()) {
                 System.out.println(rs.getInt("number") + "\t" + rs.getString("id") + "\t" + rs.getInt("pw") + rs.getInt("status"));
             }
+            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -134,6 +146,7 @@ public class UserDB extends Database {
             while (rs.next()) {
                 System.out.println(rs.getInt("number") + "\t" + rs.getString("id") + "\t" + rs.getString("pw") + "\t" + rs.getInt("status"));
             }
+            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }

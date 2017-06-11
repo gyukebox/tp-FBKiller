@@ -20,7 +20,6 @@ public class RegisterRequest extends HttpServlet {
         String pw = req.getParameter("PW");
         String hp = req.getParameter("HP");
         char gender;
-        System.out.println(req.getParameter("gender"));
         if (req.getParameter("gender").equals("남")) {
             gender = 'M';
         } else {
@@ -36,7 +35,7 @@ public class RegisterRequest extends HttpServlet {
         } else {
             //redirect to error page
             System.out.println("sign up failed");
-            resp.sendRedirect("/login.html");
+            resp.sendRedirect("/login.jsp");
         }
     }
 

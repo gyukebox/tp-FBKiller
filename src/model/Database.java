@@ -50,6 +50,10 @@ public abstract class Database {
         return 0;
     }
 
+    public int update(String id) {
+        return 0;
+    }
+
     public abstract void selectAll();
 
     public abstract int remove(int num);

@@ -21,8 +21,6 @@ public class BannedListDB extends Database {
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
         return resultValue;
@@ -42,8 +40,6 @@ public class BannedListDB extends Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
     }
 
@@ -56,10 +52,9 @@ public class BannedListDB extends Database {
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
-            System.out.println("[���� ����]\n" + e.getStackTrace());
-        } finally {
-            closeDB();
+            e.printStackTrace();
         }
+
         return resultValue;
     }
 
@@ -73,8 +68,6 @@ public class BannedListDB extends Database {
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
         return resultValue;
@@ -93,8 +86,6 @@ public class BannedListDB extends Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
     }
@@ -113,9 +104,6 @@ public class BannedListDB extends Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
-
     }
 }
