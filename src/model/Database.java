@@ -50,6 +50,10 @@ public abstract class Database {
         return 0;
     }
 
+    public int insert(String head, String body, String image) {
+        return 0;
+    }
+
     public int update(String id) {
         return 0;
     }

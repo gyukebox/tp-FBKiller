@@ -10,7 +10,7 @@ public class ArticleDB extends Database {
         super();
     }
 
-    public int Insert(String head, String body, String image) {
+    public int insert(String head, String body, String image) {
         int resultValue = 0;
 
         try {
