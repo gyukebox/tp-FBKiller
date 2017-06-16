@@ -15,7 +15,7 @@
         if(session.getAttribute("id") == null) {
             response.sendRedirect("/login.jsp");
         } else {
-            response.sendRedirect("/timeline.html");
+            response.sendRedirect("/timeline.jsp");
         }
     %>
 </body>

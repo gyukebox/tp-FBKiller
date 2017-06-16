@@ -1,12 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+
 public class TextConfirm {
 
-    public boolean checkBlackWord(String str, String[] bannedWords) {
+    public boolean checkBlackWord(String str, ArrayList<String> bannedWords) {
         String newstr = this.deleteSC(str);
 
-        for (int i = 0; i < bannedWords.length; i++) {
-            if (newstr.contains(bannedWords[i]))
+        for (int i = 0; i < bannedWords.size(); i++) {
+            if (newstr.contains(bannedWords.get(i)))
                 return true;
         }
         return false;

@@ -50,7 +50,7 @@ public abstract class Database {
         return 0;
     }
 
-    public int insert(String head, String body, String image) {
+    public int insert(Article article) {
         return 0;
     }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
@@ -10,18 +11,32 @@ public class ArticleDB extends Database {
         super();
     }
 
-    public int insert(String head, String body, String image) {
+    public ResultSet getResult() {
+        return super.rs;
+    }
+
+    @Override
+    public int insert(Article article) {
         int resultValue = 0;
+        int ban;
+        if(article.isBan()) {
+            ban = 1;
+        } else {
+            ban = 0;
+        }
 
         try {
-            String queryString = "INSERT INTO article (head, body, image) VALUES (\'" + head + "\',\'" + body + "\',\'" + image + "\')";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            String queryString = "INSERT INTO article (head, author, body, image, ban, reason) "
+                    + "VALUES (\'" + article.getTitle() + "\',\'"
+                    + article.getAuthor() + "\',\'"
+                    + article.getBody() + "\',\'"
+                    + article.getImageSource()  + "\',\'"
+                    + ban + "\',\'"
+                    + article.getReason() +"\')";
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
         return resultValue;
@@ -31,22 +46,11 @@ public class ArticleDB extends Database {
 
         try {
             String queryString = "SELECT * FROM article";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
-
             rs = stmt.executeQuery(queryString);
-
-            ResultSetMetaData resultSetMetaData = rs.getMetaData();
-
-            System.out.println(resultSetMetaData.getColumnName(1) + "\t" + resultSetMetaData.getColumnName(2) + "\t" + resultSetMetaData.getColumnName(3));
-
-            while (rs.next()) {
-                System.out.println(rs.getString("head") + "\t" + rs.getString("body") + "\t" + rs.getString("image"));
-            }
+            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
     }
 
@@ -55,13 +59,10 @@ public class ArticleDB extends Database {
 
         try {
             String queryString = "DELETE FROM article WHERE number=" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
         return resultValue;
@@ -72,13 +73,10 @@ public class ArticleDB extends Database {
 
         try {
             String queryString = "UPDATE article SET head=" + Head + ", body='" + Body + "' WHERE number =" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
 
         return resultValue;
@@ -88,24 +86,12 @@ public class ArticleDB extends Database {
     public void selectOne(int num) {
         try {
             String queryString = "SELECT * FROM article WHERE number =" + num;
-
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-
             stmt = conn.createStatement();
-
             rs = stmt.executeQuery(queryString);
-
-            System.out.println("number" + "\t" + "head" + "\t" + "body" + "\t" + "image");
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("head") + "\t" + rs.getInt("body") + rs.getInt("image"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
-
     }
 
     public void search(String searchKeyWord) {
@@ -115,16 +101,8 @@ public class ArticleDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-
-            System.out.println("number" + "\t" + "head" + "\t" + "body" + "\t" + "image");
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("head") + "\t" + rs.getString("body") + "\t" + rs.getString("image"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeDB();
         }
     }
 

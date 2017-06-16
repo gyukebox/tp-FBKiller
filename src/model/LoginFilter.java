@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if(request.getUserPrincipal() != null) {
+        if (request.getUserPrincipal() != null) {
             response.sendRedirect("/index.jsp");
         } else {
             chain.doFilter(servletRequest, servletResponse);

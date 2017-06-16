@@ -22,7 +22,7 @@ public class ArticleRequest extends HttpServlet {
 
         Article article = new Article(title, body, id);
         article.submit();
-        resp.sendRedirect("/timeline.html");
+        resp.sendRedirect("/timeline.jsp");
     }
 
     @Override

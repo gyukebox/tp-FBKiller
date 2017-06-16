@@ -14,19 +14,17 @@ import java.io.IOException;
 @WebServlet("/Login")
 public class LoginRequest extends HttpServlet {
 
-    LoginValidator validator;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
 
-        this.validator = new LoginValidator(id, pw);
+        LoginValidator validator = new LoginValidator(id, pw);
         if (validator.isValid()) {
             HttpSession session = request.getSession();
             session.setAttribute("id", id);
             session.setAttribute("pw", pw);
-            response.sendRedirect("/timeline.html");
+            response.sendRedirect("/timeline.jsp");
         } else {
             System.out.println("id or password is incorrect");
             this.doPost(request, response);

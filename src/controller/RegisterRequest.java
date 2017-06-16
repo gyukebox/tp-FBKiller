@@ -12,8 +12,6 @@ import java.io.IOException;
 @WebServlet("/Register")
 public class RegisterRequest extends HttpServlet {
 
-    RegisterValidator validator;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("ID");
@@ -26,12 +24,12 @@ public class RegisterRequest extends HttpServlet {
             gender = 'W';
         }
 
-        this.validator = new RegisterValidator(id, pw, hp, gender);
+        RegisterValidator validator = new RegisterValidator(id, pw, hp, gender);
 
         if (validator.confirm()) {
             //redirect to timeline
             System.out.println("sign up successfully done");
-            resp.sendRedirect("/timeline.html");
+            resp.sendRedirect("/timeline.jsp");
         } else {
             //redirect to error page
             System.out.println("sign up failed");

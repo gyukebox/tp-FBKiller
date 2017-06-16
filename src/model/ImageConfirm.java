@@ -9,7 +9,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 
 public class ImageConfirm {
@@ -26,7 +29,7 @@ public class ImageConfirm {
         this.context = "";
     }
 
-    public void confirm(String urlInput, String[] bannedWords) {
+    public void confirm(String urlInput, ArrayList<String> bannedWords) {
         @SuppressWarnings("deprecation")
         HttpClient httpclient = new DefaultHttpClient();
         @SuppressWarnings("deprecation")
@@ -68,9 +71,9 @@ public class ImageConfirm {
             HttpEntity Textentity = Textresponse.getEntity();
 
             if (entity != null) {
-                String Str = EntityUtils.toString(entity);
-                Str = textConfirm.deleteSC(Str);
-                if (Str.contains("isAdultContenttrue")) {
+                String str = EntityUtils.toString(entity);
+                str = textConfirm.deleteSC(str);
+                if (str.contains("isAdultContenttrue")) {
                     System.out.println("explicit content!");
                     isFinal = true;
                     context += "[explicit material] ";
@@ -78,7 +81,7 @@ public class ImageConfirm {
                     System.out.println("not an explicit content.");
                 }
 
-                if (Str.contains("isRacyContenttrue")) {
+                if (str.contains("isRacyContenttrue")) {
                     System.out.println("sexual content!");
                     isFinal = true;
                     context += "[sexual material] ";
@@ -96,10 +99,11 @@ public class ImageConfirm {
                     context += "[banned words] ";
                 }
             }
-        } catch (Exception e) {
+
+            context = "You are blinded because of " + context;
+        } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
-        context = "You are blinded because of " + context;
     }
 
     public boolean isFinal() {

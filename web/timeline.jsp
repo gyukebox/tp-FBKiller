@@ -1,3 +1,7 @@
+<%@ page import="model.ArticleDB" %>
+<%@ page import="model.Article" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 
@@ -8,42 +12,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style type="text/css">
-        .list {
-            padding-top: 70px;
+        .navbar-fixed-top {
+            margin-top: 10px;
+        }
+
+        .navbar-brand {
+            padding: 5px 35px;
         }
 
         .logo {
-            display: block;
-            color: #3B5999;
-            font-size: 28px;
-            font-weight: 700;
-            margin-left: 30px;
-            margin-right: 10px;
+            width: 120px;
+            height: 35px;
+        }
+
+        .navbar-button {
+            margin-top: 5px;
+            margin-right: 15px;
+        }
+
+        .list {
+            padding-top: 70px;
         }
 
         .img-responsive {
             max-height: 400px;
         }
-
-        /*
-        .logo {
-            display: block;
-            padding: 3px;
-            background-color: #fff;
-            color: #3B5999;
-            height: 28px;
-            width: 84px;
-            margin: 9px;
-            margin-right: 2px;
-            margin-left: 15px;
-            font-size: 20px;
-            font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-            text-shadow: 0 0 1px;
-            border-radius: 2px;
-        }
-        */
     </style>
 </head>
 
@@ -52,12 +45,10 @@
     <!--상단바-->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-            </button>
-            <a href="#" class="navbar-brand logo">FBkiller</a>
+            <a href="timeline.jsp" class="navbar-brand"><img src="fbkillerLogo.png" class="logo"></a>
         </div>
         <nav class="collapse navbar-collapse" role="navigation">
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                     <div class="input-group-btn">
@@ -66,29 +57,87 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-default btn-primary navbar-button pull-right"
-                    onclick="location.href='write.html'" style="margin-right: 50px; margin-top: 5px;">글쓰기
-            </button>
         </nav>
-    </div>
-    <!--/상단바-->
-    <!--글형식
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <a href="#" class="pull-right">View all</a>
-            <h4>제목</h4>
-        </div>
-        <div class="panel-body">
-            <p><img src="프사" class="img-circle" width="50px" height="50px">
-                <a href="#">이름</a></p>
-            <hr> 내용.
-            <br>
-            <br>
-            <img src="" class="img-responsive">
+        <div class="navbar-fixed-top">
+            <button class="btn btn-primary navbar-button pull-right" onclick="location.href='login.html'">로그아웃</button>
+            <button class="btn btn-primary navbar-button pull-right" onclick="location.href='write.html'">글쓰기</button>
         </div>
     </div>
-    -->
-    <!--글목록-->
+
+    <div class="container list">
+        <%
+            ArticleDB db = new ArticleDB();
+            db.connect();
+            db.selectAll();
+            try {
+                while (db.getResult().next()) {
+                    String title = db.getResult().getString("head");
+                    String body = db.getResult().getString("body");
+                    String author = db.getResult().getString("author");
+                    boolean ban;
+                    if (db.getResult().getInt("ban") == 1) {
+                        ban = true;
+                        String reason = db.getResult().getString("reason");
+                    } else {
+                        ban = false;
+                    }
+
+        %>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <a href="#" class="pull-right">View all</a>
+                <h4>
+                    <%
+                        out.println(title);
+                    %>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p240x240/15135948_918161824980506_1839427576752821065_n.jpg?oh=e0deee95aac348a7d8a23ef8a55fe803&oe=59A04084"
+                         class="img-circle" width="50px" height="50px">
+                    <a href="#">
+                        <%
+                            out.println(author);
+                        %>
+                    </a></p>
+                <hr>
+                <%
+                    out.println(body);
+                %>
+
+            </div>
+        </div>
+        <%
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        %>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <a href="#" class="pull-right">View all</a>
+                <h4>아직 등록된 글이 없습니다</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p240x240/15135948_918161824980506_1839427576752821065_n.jpg?oh=e0deee95aac348a7d8a23ef8a55fe803&oe=59A04084"
+                         class="img-circle" width="50px" height="50px">
+                    <a href="#"></a></p>
+                <hr>
+                아직 등록된 글이 없네요! 지금 글을 쓰러 가보실래요?
+                <br>
+                <br>
+            </div>
+        </div>
+        <%
+            }
+        %>
+    </div>
+    <%
+        db.closeDB();
+    %>
+
+    <!--
     <div class="container list">
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -99,7 +148,7 @@
                 <p>
                     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p240x240/15135948_918161824980506_1839427576752821065_n.jpg?oh=e0deee95aac348a7d8a23ef8a55fe803&oe=59A04084"
                          class="img-circle" width="50px" height="50px">
-                    <a href="#">최병규</a></p>
+                    <a href="#"></a></p>
                 <hr>
                 안녕하세요. 많은 분들의 도움으로 이번에
                 &lt;Go 웹 프로그래밍&gt;이라는 역서를 출간하게 됐습니다. 이 책은 "Go를 이용해 웹 애플리케이션 서버를 어떻게 구현할 수 있을까?"에 대한 대답을 맨땅에 헤딩하는 방식으로
@@ -199,22 +248,9 @@
                 <br><img src="" class="img-responsive">
             </div>
         </div>
-        <!-- 혹시몰라서 내비둠
-        <div class="panel panel-info">
-            <div class="panel-thumbnail"><img src="" class="img-responsive"></div>
-            <div class="panel-body">
-                <p class="lead">Social Good</p>
-                <p>1,200 Followers, 83 Posts</p>
-                <p>
-                    <img src="https://lh6.googleusercontent.com/-5cTTMHjjnzs/AAAAAAAAAAI/AAAAAAAAAFk/vgza68M4p2s/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                    <img src="https://lh4.googleusercontent.com/-6aFMDiaLg5M/AAAAAAAAAAI/AAAAAAAABdM/XjnG8z60Ug0/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                    <img src="https://lh4.googleusercontent.com/-9Yw2jNffJlE/AAAAAAAAAAI/AAAAAAAAAAA/u3WcFXvK-g8/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                </p>
-            </div>
-        </div>
-        -->
     </div>
-    <!--/글목록-->
+    -->
+
 </div>
 </body>
 
