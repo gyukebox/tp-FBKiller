@@ -46,8 +46,8 @@ public abstract class Database {
         }
     }
 
-    public int insert(String ID, String PW, int status, String HP, char gender) {
-        return 0;
+    public void insert(RegisterValidator user) {
+
     }
 
     public int insert(Article article) {

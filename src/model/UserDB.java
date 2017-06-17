@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.DriverManager;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class UserDB extends Database {
@@ -11,19 +10,22 @@ public class UserDB extends Database {
     }
 
     @Override
-    public int insert(String ID, String PW, int status, String HP, char gender) {
-        int resultValue = 0;
-
+    public void insert(RegisterValidator user) {
         try {
-            String queryString = "INSERT INTO user (id, pw, status, HP, gender) VALUES (\'" + ID + "\',\'" + PW + "\',\'" + status + "\',\'" + HP + "\',\'" + gender + "\')";
-            System.out.println(queryString);
+            String query = "INSERT INTO user (id, username, pw, picture, HP, gender)" +
+                    " VALUES (\'" +
+                    user.getIdInput() + "\',\'" +
+                    user.getNameInput() + "\',\'" +
+                    user.getPwInput() + "\',\'" +
+                    user.getImageSource() + "\',\'" +
+                    user.getPhoneNumber() + "\',\'" +
+                    user.getGender() + "\')";
             stmt = conn.createStatement();
-            resultValue = stmt.executeUpdate(queryString);
+            stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return resultValue;
     }
 
     @Override
@@ -34,25 +36,6 @@ public class UserDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            ResultSetMetaData resultSetMetaData = rs.getMetaData();
-            System.out.print(resultSetMetaData.getColumnName(1));
-            System.out.print("\t");
-            System.out.print(resultSetMetaData.getColumnName(2));
-            System.out.print("\t");
-            System.out.print(resultSetMetaData.getColumnName(3));
-            System.out.print("\t");
-            System.out.println(resultSetMetaData.getColumnName(4));
-            while (rs.next()) {
-                System.out.print(rs.getInt("number"));
-                System.out.print("\t");
-                System.out.print(rs.getString("id"));
-                System.out.print("\t");
-                System.out.print(rs.getString("pw"));
-                System.out.print("\t");
-                System.out.print(rs.getInt("status"));
-                System.out.println();
-            }
-            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -124,11 +107,6 @@ public class UserDB extends Database {
             String queryString = "SELECT * FROM user WHERE number =\'" + num + "\'";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            System.out.println("user_num" + "\t" + "ID" + "\t" + "PW" + "\t" + "Status");
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("id") + "\t" + rs.getInt("pw") + rs.getInt("status"));
-            }
-            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,11 +120,6 @@ public class UserDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            System.out.println("user_num" + "\t" + "ID" + "\t" + "PW" + "\t" + "status");
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("id") + "\t" + rs.getString("pw") + "\t" + rs.getInt("status"));
-            }
-            rs.beforeFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }

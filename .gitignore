@@ -4,3 +4,6 @@ out/*
 *.class
 web/ckeditor/*
 *.png
+.idea/
+out/
+web/ckeditor/

@@ -1,5 +1,4 @@
 <%@ page import="model.ArticleDB" %>
-<%@ page import="model.Article" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -47,6 +46,7 @@
         <div class="navbar-header">
             <a href="timeline.jsp" class="navbar-brand"><img src="fbkillerLogo.png" class="logo"></a>
         </div>
+        <!--
         <nav class="collapse navbar-collapse" role="navigation">
             <form class="navbar-form">
                 <div class="input-group input-group-sm">
@@ -58,9 +58,13 @@
                 </div>
             </form>
         </nav>
+        -->
         <div class="navbar-fixed-top">
-            <button class="btn btn-primary navbar-button pull-right" onclick="location.href='login.html'">로그아웃</button>
-            <button class="btn btn-primary navbar-button pull-right" onclick="location.href='write.html'">글쓰기</button>
+            <form method="get" action="/Logout">
+                <button class="btn btn-primary navbar-button pull-right">로그아웃</button>
+            </form>
+            <button class="btn btn-primary navbar-button pull-right" onclick="location.href='write.html'">글쓰기
+            </button>
         </div>
     </div>
 
@@ -74,14 +78,31 @@
                     String title = db.getResult().getString("head");
                     String body = db.getResult().getString("body");
                     String author = db.getResult().getString("author");
+                    String reason = null;
                     boolean ban;
                     if (db.getResult().getInt("ban") == 1) {
                         ban = true;
-                        String reason = db.getResult().getString("reason");
+                        reason = db.getResult().getString("reason");
                     } else {
                         ban = false;
                     }
-
+                    if (ban) {
+        %>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <a href="#" class="pull-right">View all</a>
+                <h4>이 게시물은 차단되었습니다</h4>
+            </div>
+            <div class="panel-body">
+                <hr>
+                차단 원인 :
+                <%
+                    out.println(reason);
+                %>
+            </div>
+        </div>
+        <%
+        } else {
         %>
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -109,6 +130,8 @@
             </div>
         </div>
         <%
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

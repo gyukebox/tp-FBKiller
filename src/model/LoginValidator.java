@@ -25,9 +25,6 @@ public class LoginValidator {
                     valid = false;
                 } else if(!pw.equals(this.pwInput)) {
                     valid = false;
-                } else {
-                    // status to 1
-                    db.update(this.idInput);
                 }
             } else {
                 valid = false;

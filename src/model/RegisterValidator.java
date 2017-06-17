@@ -4,16 +4,20 @@ import java.sql.SQLException;
 
 public class RegisterValidator {
     private String idInput;
+    private String nameInput;
     private String pwInput;
     private String phoneNumber;
+    private String imageSource;
     private char gender;
 
     private Database db;
 
-    public RegisterValidator(String idInput, String pwInput, String phoneNumber, char gender) {
+    public RegisterValidator(String idInput, String nameInput, String pwInput, String phoneNumber, String imageSource, char gender) {
         this.idInput = idInput;
+        this.nameInput = nameInput;
         this.pwInput = pwInput;
         this.phoneNumber = phoneNumber;
+        this.imageSource = imageSource;
         this.gender = gender;
 
         db = new UserDB();
@@ -29,7 +33,7 @@ public class RegisterValidator {
         try {
             while (bandb.rs.next()) {
                 String bannedWord = bandb.rs.getString("word");
-                if(id.contains(bannedWord)) {
+                if (id.contains(bannedWord)) {
                     valid = false;
                     break;
                 }
@@ -43,16 +47,16 @@ public class RegisterValidator {
     }
 
     private boolean isValidPw(String pw) {
-        if(!hasUpperCase(pw)) {
+        if (!hasUpperCase(pw)) {
             return false;
         }
-        if(!hasNumbers(pw)) {
+        if (!hasNumbers(pw)) {
             return false;
         }
-        if(!hasSpecialCharacter(pw)) {
+        if (!hasSpecialCharacter(pw)) {
             return false;
         }
-        if(pw.length() < 8) {
+        if (pw.length() < 8) {
             return false;
         }
 
@@ -72,10 +76,10 @@ public class RegisterValidator {
     }
 
     private boolean isValidHp(String hp) {
-        if(!hp.substring(0, 3).equals("010")) {
+        if (!hp.substring(0, 3).equals("010")) {
             return false;
         }
-        if(hp.length() != 11) {
+        if (hp.length() != 11) {
             return false;
         }
         return true;
@@ -84,10 +88,10 @@ public class RegisterValidator {
     private boolean isDuplicate(String id) {
         db.selectAll();
         try {
-            while(db.rs.next()) {
+            while (db.rs.next()) {
                 String storedID = db.rs.getString("ID");
                 if (id.equals(storedID)) {
-                    return false;
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -97,24 +101,47 @@ public class RegisterValidator {
     }
 
     public boolean confirm() {
-        if(!isValidId(this.idInput)) {
+        if (!isValidId(this.idInput)) {
             return false;
         }
-        if(isDuplicate(this.idInput)) {
+        if (isDuplicate(this.idInput)) {
             return false;
         }
-        if(!isValidHp(this.phoneNumber)) {
+        if (!isValidHp(this.phoneNumber)) {
             return false;
         }
-        if(!isValidPw(this.pwInput)) {
+        if (!isValidPw(this.pwInput)) {
             return false;
         }
 
         //automatically logs in after registration succeeds
-        db.insert(this.idInput, this.pwInput, 1, this.phoneNumber, this.gender);
+        db.insert(this);
 
         db.closeDB();
         return true;
     }
 
+    public String getIdInput() {
+        return idInput;
+    }
+
+    public String getNameInput() {
+        return nameInput;
+    }
+
+    public String getPwInput() {
+        return pwInput;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getImageSource() {
+        return imageSource;
+    }
+
+    public char getGender() {
+        return gender;
+    }
 }
