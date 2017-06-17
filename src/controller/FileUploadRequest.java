@@ -15,7 +15,9 @@ import java.util.List;
 
 @WebServlet("/Fileupload")
 public class FileUploadRequest extends HttpServlet {
-    private final String filePath = "/Users/gyukebox/school/2-1/ca/teamproject/teamproject/files";
+    private final String filePath = "/Users/gyukebox/school/2-1/ca/teamproject/teamproject/files/";
+    private final int maxFileSize = 1024 * 1024 * 512;
+    private final int maxMemorySize = 1024 * 1024 * 4;
     private boolean isMultiPart;
     private File file;
 
@@ -33,7 +35,9 @@ public class FileUploadRequest extends HttpServlet {
         }
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(maxMemorySize);
         ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setSizeMax(maxFileSize);
 
         try {
             List fileItems = upload.parseRequest(req);
@@ -50,6 +54,7 @@ public class FileUploadRequest extends HttpServlet {
                 }
             }
         } catch (Exception e) {
+            System.out.println("file upload failed");
             e.printStackTrace();
         }
 

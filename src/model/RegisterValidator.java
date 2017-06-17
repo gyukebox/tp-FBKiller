@@ -3,25 +3,12 @@ package model;
 import java.sql.SQLException;
 
 public class RegisterValidator {
-    private String idInput;
-    private String nameInput;
-    private String pwInput;
-    private String phoneNumber;
-    private String imageSource;
-    private char gender;
-
+    private User user;
     private Database db;
 
-    public RegisterValidator(String idInput, String nameInput, String pwInput, String phoneNumber, String imageSource, char gender) {
-        this.idInput = idInput;
-        this.nameInput = nameInput;
-        this.pwInput = pwInput;
-        this.phoneNumber = phoneNumber;
-        this.imageSource = imageSource;
-        this.gender = gender;
-
+    public RegisterValidator(User user) {
+        this.user = user;
         db = new UserDB();
-        db.connect();
     }
 
     private boolean isValidId(String id) {
@@ -101,47 +88,24 @@ public class RegisterValidator {
     }
 
     public boolean confirm() {
-        if (!isValidId(this.idInput)) {
+        if (!isValidId(this.user.getId())) {
             return false;
         }
-        if (isDuplicate(this.idInput)) {
+        if (isDuplicate(this.user.getId())) {
             return false;
         }
-        if (!isValidHp(this.phoneNumber)) {
+        if (!isValidHp(this.user.getPhoneNumber())) {
             return false;
         }
-        if (!isValidPw(this.pwInput)) {
+        if (!isValidPw(this.user.getPassword())) {
             return false;
         }
 
-        //automatically logs in after registration succeeds
-        db.insert(this);
-
-        db.closeDB();
         return true;
     }
 
-    public String getIdInput() {
-        return idInput;
-    }
-
-    public String getNameInput() {
-        return nameInput;
-    }
-
-    public String getPwInput() {
-        return pwInput;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getImageSource() {
-        return imageSource;
-    }
-
-    public char getGender() {
-        return gender;
+    public void submit() {
+        db.insert(user);
+        db.closeDB();
     }
 }

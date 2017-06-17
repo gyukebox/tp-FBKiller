@@ -2,7 +2,6 @@ package model;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class ArticleDB extends Database {
@@ -26,9 +25,10 @@ public class ArticleDB extends Database {
         }
 
         try {
-            String queryString = "INSERT INTO article (head, author, body, image, ban, reason) "
+            String queryString = "INSERT INTO article (head, author, authorprofile, body, image, ban, reason) "
                     + "VALUES (\'" + article.getTitle() + "\',\'"
-                    + article.getAuthor() + "\',\'"
+                    + article.getAuthor().getUsername() + "\',\'"
+                    + article.getAuthor().getProfilePicture() + "\',\'"
                     + article.getBody() + "\',\'"
                     + article.getImageSource()  + "\',\'"
                     + ban + "\',\'"

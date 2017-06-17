@@ -1,6 +1,7 @@
 package controller;
 
 import model.LoginValidator;
+import model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +21,10 @@ public class LoginRequest extends HttpServlet {
         String pw = request.getParameter("pw");
 
         LoginValidator validator = new LoginValidator(id, pw);
-        if (validator.isValid()) {
+        User user = validator.validate();
+        if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("id", id);
-            session.setAttribute("pw", pw);
+            session.setAttribute("user", user);
             response.sendRedirect("/timeline.jsp");
         } else {
             System.out.println("id or password is incorrect");

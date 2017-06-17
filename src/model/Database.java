@@ -46,7 +46,7 @@ public abstract class Database {
         }
     }
 
-    public void insert(RegisterValidator user) {
+    public void insert(User user) {
 
     }
 

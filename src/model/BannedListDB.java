@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.DriverManager;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class BannedListDB extends Database {
@@ -33,11 +32,6 @@ public class BannedListDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            ResultSetMetaData resultSetMetaData = rs.getMetaData();
-            System.out.println(resultSetMetaData.getColumnName(1) + "\t" + resultSetMetaData.getColumnName(2));
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("word"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,10 +74,6 @@ public class BannedListDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            System.out.println("number" + "\t" + "word");
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("word"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,11 +87,6 @@ public class BannedListDB extends Database {
             conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
-            System.out.println("number" + "\t" + "word");
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("number") + "\t" + rs.getString("word"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

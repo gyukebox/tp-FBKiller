@@ -29,45 +29,45 @@
 </div>
 <div class="container">
     <br>
-    <form method="GET" action="/Register">
+    <form action="Register" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="ID" class="col-lg-3 control-label">아이디</label>
+            <label class="col-lg-3 control-label">아이디</label>
             <div class="col-lg-7">
-                <input type="text" class="form-control" id="ID" name="ID" placeholder="User ID" required=""
+                <input type="text" class="form-control" name="ID" placeholder="User ID" required=""
                        maxlength="30">
             </div>
         </div>
         <div class="form-group">
-            <label for="name" class="col-lg-3 control-label">이름</label>
+            <label class="col-lg-3 control-label">이름</label>
             <div class="col-lg-7">
-                <input type="text" class="form-control" id="name" name="name" placeholder="당신의 이름" required=""
+                <input type="text" class="form-control" name="name" placeholder="당신의 이름" required=""
                        maxlength="30">
             </div>
         </div>
         <div class="form-group">
-            <label for="PW" class="col-lg-3 control-label">패스워드</label>
+            <label class="col-lg-3 control-label">패스워드</label>
             <div class="col-lg-7">
-                <input type="password" class="form-control" id="PW" name="PW"
+                <input type="password" class="form-control" name="PW"
                        placeholder="Password 8~20" required="" maxlength="20" minlength="8">
             </div>
         </div>
-        <div class="form-group">
-            <label for="profilepic" class="col-lg-3 control-label">프로필 사진</label>
+        <!-- div class="form-group">
+            <label class="col-lg-3 control-label">프로필 사진</label>
             <div class="col-lg-7">
-                <input type="file" class="form-control" id="profilepic" name="profilepic" size="100">
+                <input type="file" class="form-control" name="profilepic" size="100">
             </div>
-        </div>
+        </div -->
         <div class="form-group">
-            <label for="HP" class="col-lg-3 control-label">휴대폰 번호</label>
+            <label class="col-lg-3 control-label">휴대폰 번호</label>
             <div class="col-lg-7">
-                <input type="number" class="form-control onlyNumber" id="HP" name="HP" placeholder="-를 제외하고 숫자만 입력하세요."
+                <input type="number" class="form-control onlyNumber" name="HP" placeholder="-를 제외하고 숫자만 입력하세요."
                        required="" maxlength="11">
             </div>
         </div>
         <div class="form-group">
-            <label for="gender" class="col-lg-3 control-label">성별</label>
+            <label class="col-lg-3 control-label">성별</label>
             <div class="col-lg-7">
-                <select class="form-control" id="gender" name="gender">
+                <select class="form-control" name="gender">
                     <option value="M">남</option>
                     <option value="F">여</option>
                 </select>

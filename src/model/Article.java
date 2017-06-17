@@ -1,12 +1,13 @@
 package model;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Article {
     private String title;
     private String body;
-    private String author;
+    private User author;
     private String imageSource;
     private boolean ban;
     private String reason;
@@ -15,7 +16,7 @@ public class Article {
 
     }
 
-    public Article(String title, String body, String author) {
+    public Article(String title, String body, User author) {
         this.title = title;
         this.body = body;
         this.author = author;
@@ -28,6 +29,13 @@ public class Article {
         //1. title == null? body == null?
         if (title == null || body == null) {
             return;
+        }
+
+        try {
+            title = new String(title.getBytes("8859_1"), "utf-8");
+            body = new String(body.getBytes("8859_1"), "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         //2. ad? (AdCheck class의 메소드를 실행)
@@ -58,7 +66,7 @@ public class Article {
         return body;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 

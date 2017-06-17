@@ -10,14 +10,14 @@ public class UserDB extends Database {
     }
 
     @Override
-    public void insert(RegisterValidator user) {
+    public void insert(User user) {
         try {
             String query = "INSERT INTO user (id, username, pw, picture, HP, gender)" +
                     " VALUES (\'" +
-                    user.getIdInput() + "\',\'" +
-                    user.getNameInput() + "\',\'" +
-                    user.getPwInput() + "\',\'" +
-                    user.getImageSource() + "\',\'" +
+                    user.getId() + "\',\'" +
+                    user.getUsername() + "\',\'" +
+                    user.getPassword() + "\',\'" +
+                    user.getProfilePicture() + "\',\'" +
                     user.getPhoneNumber() + "\',\'" +
                     user.getGender() + "\')";
             stmt = conn.createStatement();

@@ -12,7 +12,7 @@
 </head>
 <body>
     <%
-        if(session.getAttribute("id") == null) {
+        if(session.getAttribute("user") == null) {
             response.sendRedirect("/login.jsp");
         } else {
             response.sendRedirect("/timeline.jsp");
