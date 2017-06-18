@@ -26,7 +26,6 @@ public class Article {
     }
 
     public void submit() {
-        //1. title == null? body == null?
         if (title == null || body == null) {
             return;
         }
@@ -38,19 +37,20 @@ public class Article {
             e.printStackTrace();
         }
 
-        //2. ad? (AdCheck class의 메소드를 실행)
+        this.ban = filter();
+        if(ban) {
+            try {
+                reason = new String(reason.getBytes("8859_1"), "utf-8");
+                System.out.println(reason);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
-        // db connection & insertion
         Database db = new ArticleDB();
         db.connect();
-        // db.insert(title, body, null);
         db.insert(this);
         db.closeDB();
-    }
-
-    //수정시에는 웹 화면에서 수정전 데이터가 보여진다
-    public void edit() {
-        this.submit();
     }
 
     public void delete() {
@@ -74,7 +74,7 @@ public class Article {
         return imageSource;
     }
 
-    public boolean isBan() {
+    public boolean filter() {
         BannedListDB bannedListDB = new BannedListDB();
         bannedListDB.selectAll();
         ArrayList<String> bannedWords = new ArrayList<>();
@@ -85,14 +85,23 @@ public class Article {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        TextConfirm textConfirm = new TextConfirm();
-        textConfirm.checkBlackWord(title, bannedWords);
-        textConfirm.checkBlackWord(body, bannedWords);
-        ImageConfirm imageConfirm = new ImageConfirm();
-        if (this.imageSource != null) {
-            imageConfirm.confirm(this.imageSource, bannedWords);
+
+        if(TextConfirm.checkBlackWord(title, bannedWords) || TextConfirm.checkBlackWord(body, bannedWords)) {
+            this.reason = "게시물 차단 이유 : [금지어]";
+            System.out.println(reason);
+            return true;
         }
+
+        if (this.imageSource != null) {
+            this.reason = ImageConfirm.confirm(this.imageSource, bannedWords);
+            return true;
+        }
+
         return false;
+    }
+
+    public boolean isBan() {
+        return ban;
     }
 
     public String getReason() {

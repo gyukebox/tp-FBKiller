@@ -16,20 +16,14 @@ import java.util.ArrayList;
 
 
 public class ImageConfirm {
-    //public boolean isAdultContent;
-    //public boolean isRacyContent;
-    //public boolean isBannedContent;
-    private boolean isFinal;
-    private String context;
-    private TextConfirm textConfirm;
+    private static String context = null;
 
+    private ImageConfirm() {
 
-    public ImageConfirm() {
-        this.isFinal = false;
-        this.context = "";
     }
 
-    public void confirm(String urlInput, ArrayList<String> bannedWords) {
+    public static String confirm(String urlInput, ArrayList<String> bannedWords) {
+        boolean ban = false;
         @SuppressWarnings("deprecation")
         HttpClient httpclient = new DefaultHttpClient();
         @SuppressWarnings("deprecation")
@@ -72,19 +66,19 @@ public class ImageConfirm {
 
             if (entity != null) {
                 String str = EntityUtils.toString(entity);
-                str = textConfirm.deleteSC(str);
+                str = TextConfirm.deleteSC(str);
                 if (str.contains("isAdultContenttrue")) {
+                    ban = true;
                     System.out.println("explicit content!");
-                    isFinal = true;
-                    context += "[explicit material] ";
+                    context += "[광고] ";
                 } else {
                     System.out.println("not an explicit content.");
                 }
 
                 if (str.contains("isRacyContenttrue")) {
+                    ban = true;
                     System.out.println("sexual content!");
-                    isFinal = true;
-                    context += "[sexual material] ";
+                    context += "[19금] ";
                 } else {
                     System.out.println("not a sexual content.");
                 }
@@ -92,25 +86,23 @@ public class ImageConfirm {
 
             if (Textentity != null) {
                 String Str = EntityUtils.toString(Textentity);
-                Str = textConfirm.deleteSC(Str);
+                Str = TextConfirm.deleteSC(Str);
 
-                if (textConfirm.checkBlackWord(Str, bannedWords)) {
-                    isFinal = true;
-                    context += "[banned words] ";
+                if (TextConfirm.checkBlackWord(Str, bannedWords)) {
+                    ban = true;
+                    context += "[금지어] ";
                 }
             }
 
-            context = "You are blinded because of " + context;
+            if (ban) {
+                context = "게시물 차단 이유 : " + context;
+            }
+
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
-    }
 
-    public boolean isFinal() {
-        return isFinal;
-    }
-
-    public String getContext() {
+        System.out.println(context);
         return context;
     }
 }

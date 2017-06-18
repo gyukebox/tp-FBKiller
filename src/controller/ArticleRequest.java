@@ -30,7 +30,6 @@ public class ArticleRequest extends HttpServlet {
 
         Article article = new Article(title, body, author);
 
-
         article.submit();
         resp.sendRedirect("/timeline.jsp");
     }

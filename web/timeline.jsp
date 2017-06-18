@@ -97,7 +97,7 @@
             </div>
             <div class="panel-body">
                 <hr>
-                차단 원인 : <%=reason%>
+                <%=reason%>
             </div>
         </div>
         <%

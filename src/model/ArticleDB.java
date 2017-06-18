@@ -24,6 +24,14 @@ public class ArticleDB extends Database {
             ban = 0;
         }
 
+        //test
+        System.out.println("article info:");
+        System.out.println(article.getAuthor());
+        System.out.println(article.getTitle());
+        System.out.println(article.getBody());
+        System.out.println(article.isBan());
+        System.out.println(article.getReason());
+
         try {
             String queryString = "INSERT INTO article (head, author, authorprofile, body, image, ban, reason) "
                     + "VALUES (\'" + article.getTitle() + "\',\'"
