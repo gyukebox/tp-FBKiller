@@ -30,22 +30,15 @@ public class RegisterRequest extends HttpServlet {
         String pw = req.getParameter("PW");
         String hp = req.getParameter("HP");
         String genderInput = req.getParameter("gender");
-        char gender;
+        char gender = genderInput.charAt(0);
 
         // test
         System.out.println(id + " " + username + " " + pw + " " + hp + " " + genderInput);
-
-        if (genderInput.equals("남")) {
-            gender = 'M';
-        } else {
-            gender = 'W';
-        }
 
         User user = new User(id, username, pw, null, hp, gender);
         RegisterValidator validator = new RegisterValidator(user);
 
         if (validator.confirm()) {
-
             /*
             req.getRequestDispatcher("/Fileupload").include(req, resp);
             Part filePart = req.getPart("profilepic");
@@ -54,6 +47,10 @@ public class RegisterRequest extends HttpServlet {
 
             user.setProfilePicture(fileName);
             */
+            req.getRequestDispatcher("/Fileupload").include(req, resp);
+            String filename = (String) req.getSession().getAttribute("filename");
+            System.out.println("profile picture : " + filename);
+            user.setProfilePicture(filename);
             validator.submit();
 
             System.out.println("sign up successfully done");

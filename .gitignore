@@ -7,3 +7,4 @@ web/ckeditor/*
 .idea/
 out/
 web/ckeditor/
+web/files/*

@@ -111,8 +111,8 @@
             </div>
             <div class="panel-body">
                 <p>
-                    <!--img src=< / %="/Users/gyukebox/school/2-1/ca/teamproject/teamproject/files/" + db.getResult().getString("authorprofile")%>
-                         class="img-circle" width="50px" height="50px" -->
+                    <img src="files/<%=db.getResult().getString("authorprofile")%>"
+                         class="img-circle" width="50px" height="50px">
                     <a href="#"><%=author%>
                     </a></p>
                 <hr>

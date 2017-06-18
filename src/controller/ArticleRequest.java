@@ -29,6 +29,8 @@ public class ArticleRequest extends HttpServlet {
         User author = (User) session.getAttribute("user");
 
         Article article = new Article(title, body, author);
+
+
         article.submit();
         resp.sendRedirect("/timeline.jsp");
     }
