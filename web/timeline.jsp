@@ -92,7 +92,7 @@
         %>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <a href="#" class="pull-right">View all</a>
+                <a href="#" class="pull-right">삭제</a>
                 <h4>이 게시물은 차단되었습니다</h4>
             </div>
             <div class="panel-body">
@@ -105,7 +105,7 @@
         %>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <a href="#" class="pull-right">View all</a>
+                <a href="#" class="pull-right">삭제</a>
                 <h4><%=title%>
                 </h4>
             </div>
@@ -117,19 +117,27 @@
                     </a></p>
                 <hr>
                 <%=body%>
+                <%
+                    String imageSource = db.getResult().getString("image");
+                    if (!imageSource.equals("")) {
+                %>
+                <br>
+                <img src="files/<%=imageSource%>" class="img-responsive">
+                <%
+                    }
+                %>
             </div>
         </div>
         <%
                 }
 
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            if (!db.getResult().next()) {
         %>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <a href="#" class="pull-right">View all</a>
-                <h4>아직 등록된 글이 없습니다</h4>
+                <h4>더 이상 등록된 글이 없습니다</h4>
             </div>
             <div class="panel-body">
                 <p>
@@ -137,12 +145,16 @@
                          class="img-circle" width="50px" height="50px">
                     <a href="#"></a></p>
                 <hr>
-                아직 등록된 글이 없네요! 지금 글을 쓰러 가보실래요?
+                더 이상 등록된 글이 없네요! 지금 글을 쓰러 가보실래요?
                 <br>
                 <br>
             </div>
         </div>
         <%
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+
             }
         %>
     </div>

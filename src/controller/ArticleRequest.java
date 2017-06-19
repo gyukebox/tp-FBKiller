@@ -6,10 +6,7 @@ import model.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/Article")
@@ -29,6 +26,10 @@ public class ArticleRequest extends HttpServlet {
         User author = (User) session.getAttribute("user");
 
         Article article = new Article(title, body, author);
+
+        req.getRequestDispatcher("/Fileupload").include(req, resp);
+        String imageSource = (String) session.getAttribute("filename");
+        article.setImageSource(imageSource);
 
         article.submit();
         resp.sendRedirect("/timeline.jsp");

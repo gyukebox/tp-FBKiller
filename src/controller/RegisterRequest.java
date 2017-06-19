@@ -39,14 +39,6 @@ public class RegisterRequest extends HttpServlet {
         RegisterValidator validator = new RegisterValidator(user);
 
         if (validator.confirm()) {
-            /*
-            req.getRequestDispatcher("/Fileupload").include(req, resp);
-            Part filePart = req.getPart("profilepic");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            System.out.println(fileName); //test
-
-            user.setProfilePicture(fileName);
-            */
             req.getRequestDispatcher("/Fileupload").include(req, resp);
             String filename = (String) req.getSession().getAttribute("filename");
             System.out.println("profile picture : " + filename);
@@ -54,6 +46,7 @@ public class RegisterRequest extends HttpServlet {
             validator.submit();
 
             System.out.println("sign up successfully done");
+            req.getSession().setAttribute("filename", null);
             resp.sendRedirect("/index.jsp");
         } else {
             //redirect to error page

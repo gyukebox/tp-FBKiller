@@ -15,7 +15,6 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "INSERT INTO ban (word) VALUES (\'" + word + "\')";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -29,7 +28,6 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "SELECT * FROM ban";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {
@@ -42,7 +40,6 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "DELETE FROM ban WHERE number =" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {

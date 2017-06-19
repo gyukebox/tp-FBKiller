@@ -20,13 +20,15 @@ public class FileUploadRequest extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Part filePart = req.getPart("profilepic");
+        Part filePart = req.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = filePart.getInputStream();
-        filePart.write(filePath + fileName);
+        if(!fileName.equals("")) {
+            filePart.write(filePath + fileName);
+        }
 
         HttpSession session = req.getSession();
         session.setAttribute("filename", fileName);
+
 
         resp.sendRedirect(req.getHeader("referer"));
     }

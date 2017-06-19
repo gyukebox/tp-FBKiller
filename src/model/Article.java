@@ -76,6 +76,7 @@ public class Article {
 
     public boolean filter() {
         BannedListDB bannedListDB = new BannedListDB();
+        bannedListDB.connect();
         bannedListDB.selectAll();
         ArrayList<String> bannedWords = new ArrayList<>();
         try {
@@ -94,7 +95,9 @@ public class Article {
 
         if (this.imageSource != null) {
             this.reason = ImageConfirm.confirm(this.imageSource, bannedWords);
-            return true;
+            if(reason != null) {
+                return true;
+            }
         }
 
         return false;
@@ -106,5 +109,9 @@ public class Article {
 
     public String getReason() {
         return reason;
+    }
+
+    public void setImageSource(String imageSource) {
+        this.imageSource = imageSource;
     }
 }
