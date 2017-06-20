@@ -140,10 +140,6 @@
                 <h4>더 이상 등록된 글이 없습니다</h4>
             </div>
             <div class="panel-body">
-                <p>
-                    <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p240x240/15135948_918161824980506_1839427576752821065_n.jpg?oh=e0deee95aac348a7d8a23ef8a55fe803&oe=59A04084"
-                         class="img-circle" width="50px" height="50px">
-                    <a href="#"></a></p>
                 <hr>
                 더 이상 등록된 글이 없네요! 지금 글을 쓰러 가보실래요?
                 <br>

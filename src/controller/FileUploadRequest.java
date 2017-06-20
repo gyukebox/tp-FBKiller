@@ -5,7 +5,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 
 @WebServlet("/Fileupload")
