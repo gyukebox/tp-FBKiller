@@ -8,6 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css">
+        .navbar-static-top {
+            margin-top: 10px;
+        }
+
+        .navbar-brand {
+            padding: 5px 35px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 35px;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,6 +31,11 @@
         out.println("<font color=red size=4px" + loginmsg + "</font>");
     }
 %>
+<div class="navbar navbar-static-top">
+    <div class="navbar-header">
+        <a href="#" class="navbar-brand"><img src="fbkillerLogo.png" class="logo"></a>
+    </div>
+</div>
 <div class="container col-lg-offset-3 col-lg-6">
     <form class="form-signin" method="get" action="/Login">
         <h2>Please sign in</h2>

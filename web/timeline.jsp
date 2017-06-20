@@ -42,24 +42,10 @@
 
 <body>
 <div class="container-fluid" id="main">
-    <!--상단바-->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-header">
             <a href="timeline.jsp" class="navbar-brand"><img src="fbkillerLogo.png" class="logo"></a>
         </div>
-        <!--
-        <nav class="collapse navbar-collapse" role="navigation">
-            <form class="navbar-form">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </nav>
-        -->
         <div class="navbar-fixed-top">
             <form method="get" action="/Logout">
                 <button class="btn btn-primary navbar-button pull-right">로그아웃</button>

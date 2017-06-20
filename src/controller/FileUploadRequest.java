@@ -28,7 +28,6 @@ public class FileUploadRequest extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("filename", fileName);
 
-
         resp.sendRedirect(req.getHeader("referer"));
     }
 }
