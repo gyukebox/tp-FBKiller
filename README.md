@@ -18,7 +18,7 @@
 
 # 로컬에서 사용 방법
 1. 현재 레포지토리를 clone 하시면 됩니다. Mac의 경우는 터미널에서, Windows 의 경우에서는 git client에서,   
-`git clone https://github/com/2017-1-ca/ggyu.git'  
+`git clone https://github/com/2017-1-ca/ggyu.git` 
 명령어를 치시면 모든 파일이 받아집니다.
 
 2. 소스 코드를 열어서 파일 경로를 알맞게 편집합니다(프로젝트 폴더가 담긴 디렉토리의 web/files 로)
