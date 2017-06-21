@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class UserDB extends Database {
@@ -33,7 +32,6 @@ public class UserDB extends Database {
 
         try {
             String queryString = "SELECT * FROM user";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {
@@ -48,7 +46,6 @@ public class UserDB extends Database {
         try {
             super.connect();
             String queryString = "DELETE FROM user WHERE number =" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -117,7 +114,6 @@ public class UserDB extends Database {
 
         try {
             String queryString = "SELECT * FROM user WHERE id LIKE '%" + searchKeyWord + "%'";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {

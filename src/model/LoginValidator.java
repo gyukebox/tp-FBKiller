@@ -12,19 +12,18 @@ public class LoginValidator {
         this.pw = pw;
     }
 
-    // makes instance of an user when is valid, returns null if invalid
     public User validate() {
         User user = null;
         db = new UserDB();
         db.connect();
         db.search(this.id);
         try {
-            if(db.rs.next()) {
+            if (db.rs.next()) {
                 String id = db.rs.getString("id");
                 String pw = db.rs.getString("pw");
-                if(!id.equals(this.id)) {
+                if (!id.equals(this.id)) {
                     return null;
-                } else if(!pw.equals(this.pw)) {
+                } else if (!pw.equals(this.pw)) {
                     return null;
                 } else {
                     String username = db.rs.getString("username");

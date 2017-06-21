@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BannedListDB extends Database {
@@ -54,7 +53,6 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "UPDATE ban SET word=" + word + " WHERE number =" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -68,7 +66,6 @@ public class BannedListDB extends Database {
     public void selectOne(int num) {
         try {
             String queryString = "SELECT * FROM ban WHERE number =" + num;
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {
@@ -81,7 +78,6 @@ public class BannedListDB extends Database {
 
         try {
             String queryString = "SELECT * FROM ban WHERE word LIKE '%" + searchKeyWord + "%'";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {

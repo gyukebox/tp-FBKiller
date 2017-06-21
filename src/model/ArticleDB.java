@@ -18,7 +18,7 @@ public class ArticleDB extends Database {
     public int insert(Article article) {
         int resultValue = 0;
         int ban;
-        if(article.isBan()) {
+        if (article.isBan()) {
             ban = 1;
         } else {
             ban = 0;
@@ -38,9 +38,9 @@ public class ArticleDB extends Database {
                     + article.getAuthor().getUsername() + "\',\'"
                     + article.getAuthor().getProfilePicture() + "\',\'"
                     + article.getBody() + "\',\'"
-                    + article.getImageSource()  + "\',\'"
+                    + article.getImageSource() + "\',\'"
                     + ban + "\',\'"
-                    + article.getReason() +"\')";
+                    + article.getReason() + "\')";
             stmt = conn.createStatement();
             resultValue = stmt.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -106,7 +106,6 @@ public class ArticleDB extends Database {
 
         try {
             String queryString = "SELECT * FROM article WHERE head LIKE '%" + searchKeyWord + "%'";
-            conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(queryString);
         } catch (SQLException e) {

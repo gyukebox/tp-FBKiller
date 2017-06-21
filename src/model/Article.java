@@ -38,7 +38,7 @@ public class Article {
         }
 
         this.ban = filter();
-        if(ban) {
+        if (ban) {
             try {
                 reason = new String(reason.getBytes("8859_1"), "utf-8");
                 System.out.println(reason);
@@ -51,11 +51,6 @@ public class Article {
         db.connect();
         db.insert(this);
         db.closeDB();
-    }
-
-    public void delete() {
-        //1. 고냥 DB에서 지운다
-        //2. 다시 ArticleRequest로 보냄
     }
 
     public String getTitle() {
@@ -87,7 +82,7 @@ public class Article {
             e.printStackTrace();
         }
 
-        if(TextConfirm.checkBlackWord(title, bannedWords) || TextConfirm.checkBlackWord(body, bannedWords)) {
+        if (TextConfirm.checkBlackWord(title, bannedWords) || TextConfirm.checkBlackWord(body, bannedWords)) {
             this.reason = "게시물 차단 이유 : [금지어]";
             System.out.println(reason);
             return true;
@@ -95,7 +90,7 @@ public class Article {
 
         if (this.imageSource != null) {
             this.reason = ImageConfirm.confirm(this.imageSource, bannedWords);
-            if(reason != null) {
+            if (reason != null) {
                 return true;
             }
         }
