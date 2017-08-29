@@ -1,28 +1,12 @@
-# 컴응 SNS 개발
+# FBKiller - Ad-free SNS Service
 
-### 개발 환경 및 언어
-- Front-end : HTML/CSS  
-- Back-end : Java + Servlets & JSP + MySQL  
+### Development Environment
+- Frontend : HTML/CSS  
+- Backend : Java + Servlets & JSP + MySQL  
 
-### 지원하는 기능
-- 로그인/로그아웃  
-- 회원가입  
-- 글쓰기  
-- 광고 차단 기능  
+### This Service Supports...
+- Login/Logout
+- Register  
+- Write posts & comment!  
+- Ad-blocking Service
 
-### Overall 설명  
-페이스북 같은 SNS 서비스를 개발해 보았습니다. 광고 필터링 기능이 추가된 페이스북 미니 버전이라고 보시면 되겠습니다.  
-
-### 추후 계획
-서비스가 호스팅 되는 대로 URL이 업로드가 될 예정입니다.  
-
-# 로컬에서 사용 방법
-1. 현재 레포지토리를 clone 하시면 됩니다. Mac의 경우는 터미널에서, Windows 의 경우에서는 git client에서,   
-`git clone https://github/com/2017-1-ca/ggyu.git` 
-명령어를 치시면 모든 파일이 받아집니다.
-
-2. 소스 코드를 열어서 파일 경로를 알맞게 편집합니다(프로젝트 폴더가 담긴 디렉토리의 web/files 로)
-3. 데이터베이스 모델을 수정합니다.
-4. 이제 빌드하시면 로컬에서도 원활하게 사용하실 수 있습니다.
-
-#### 현재 호스팅에 문제가 생겨 호스팅이 되지 않은 상태입니다. 호스팅이 완료되는 대로 링크를 올릴 예정입니다.
